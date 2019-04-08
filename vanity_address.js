@@ -2,7 +2,7 @@
  * file: vanity_address.js
  *
  *  This program finds a private key with a corresponding Ethereum address that starts with "0x<hex_string_of_your_choice>".
- *  Uses privateToPublic and keccak256 to demonstrate the address generation process, hashing and the use of buffers
+ *  Uses privateToPublic and keccak256 to demonstrate the address generation process, hashing and the use of buffers.
  */
 
 
@@ -31,25 +31,18 @@ do {
 
   // get 32 bytes to be the private key
   var private_key = crypto.randomBytes(32);
-  // console.log (private_key);
 
   // make public key
   let public_key = eth.privateToPublic(private_key);
-  // console.log (public_key);
 
   // hash public key with keccak256
   let hash_of_public_key = eth.keccak256(public_key);
-  // console.log (hash_of_public_key);
 
   // encode hash as hexadecimal
   let hex_encode = hash_of_public_key.toString('hex');
-  // console.log (hex_encode);
-
-  //process.stdout.write ('.');
 
   // take last 20 bytes of hash: 1 byte = 2 hex chars
   ethereum_address = hex_encode.slice (24);
-  //console.log (ethereum_address);
 
 } while (!ethereum_address.startsWith('abba')); /* <--- replace abba
   * with your vanity hexword or hexnumbers (lowercase), unless you are
